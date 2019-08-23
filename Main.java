@@ -2,6 +2,7 @@ package owl;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.Stack;
 
 public class Main {
@@ -12,6 +13,7 @@ public class Main {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 			Stack<Double> stack = new Stack<Double>();
 			System.out.println("JavaRPN: Input numbers and operands separated by newline or space");
+			DecimalFormat df = new DecimalFormat("#,###.#########");
 			while (!exit) {
 				String input = reader.readLine();
 				String[] inputs = input.split(" ");
@@ -21,7 +23,7 @@ public class Main {
 						break;
 					}
 					if (inputs[i].equals("p")) {
-						System.out.println(stack.peek());
+						System.out.println(df.format(stack.peek()));
 						continue;
 					}
 					if (inputs[i].equals("c")) {
