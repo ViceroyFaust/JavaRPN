@@ -20,6 +20,14 @@ public class Main {
 						exit = true;
 						break;
 					}
+					if (inputs[i].equals("p")) {
+						System.out.println(stack.peek());
+						continue;
+					}
+					if (inputs[i].equals("c")) {
+						stack.clear();
+						continue;
+					}
 					if (isNumber(inputs[i])) {
 						stack.push(Double.parseDouble(inputs[i]));
 						continue;
@@ -39,24 +47,29 @@ public class Main {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private static void function(String string, Stack<Double> stack) {
+		double num = stack.pop();
 		switch (string) {
-		case "p":
-			System.out.println(stack.peek());
-			break;
 		case "s":
-			double num = stack.pop();
 			stack.push(num * num);
+			break;
+		case "sin":
+			stack.push(Math.sin(Math.toRadians(num)));
+			break;
+		case "cos":
+			stack.push(Math.cos(Math.toRadians(num)));
+			break;
+		case "tan":
+			stack.push(Math.tan(Math.toRadians(num)));
 			break;
 		}
 
 	}
 
 	private static boolean isFunction(String input) {
-		if (input.equals("p") || input.equals("s")) {
+		if (input.equals("s") || input.equals("sin") || input.equals("cos") || input.equals("tan")) {
 			return true;
 		}
 		return false;
@@ -77,12 +90,16 @@ public class Main {
 			break;
 		case "/":
 			stack.push(num1 / num2);
+			break;
+		case "^":
+			stack.push(Math.pow(num1, num2));
+			break;
 		}
 	}
 
 	private static boolean isNumber(String input) {
-		if (input.equals("+") || input.equals("-") || input.equals("*") || input.equals("/") || input.equals("p")
-				|| input.equals("s")) {
+		if (input.equals("+") || input.equals("-") || input.equals("*") || input.equals("/") || input.equals("s")
+				|| input.equals("^") || input.equals("sin") || input.equals("cos") || input.equals("tan")) {
 			return false;
 		}
 		return true;
