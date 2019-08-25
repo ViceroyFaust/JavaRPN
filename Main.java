@@ -9,102 +9,122 @@ public class Main {
 
 	public static void main(String[] args) {
 		try {
-			boolean exit = false;
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 			Stack<Double> stack = new Stack<Double>();
 			System.out.println("JavaRPN: Input numbers and operands separated by newline or space");
 			DecimalFormat df = new DecimalFormat("#,###.#########");
-			while (!exit) {
+			while (true) {
 				String input = reader.readLine();
 				String[] inputs = input.split(" ");
 				for (int i = 0; i < inputs.length; i++) {
-					if (inputs[i].equals("e")) {
-						exit = true;
-						break;
-					}
-					if (inputs[i].equals("p")) {
-						System.out.println(df.format(stack.peek()));
-						continue;
-					}
-					if (inputs[i].equals("c")) {
-						stack.clear();
-						continue;
-					}
 					if (isNumber(inputs[i])) {
 						stack.push(Double.parseDouble(inputs[i]));
 						continue;
-					} else if (isFunction(inputs[i])) {
+					}
+					if (inputs[i].equals("e") || inputs[i].equals("p") || inputs[i].equals("c")) {
+						commands(inputs[i], stack, df);
+					} else if (inputs[i].equals("sq") || inputs[i].equals("sin") || inputs[i].equals("cos")
+							|| inputs[i].equals("tan") || inputs[i].equals("asin") || inputs[i].equals("acos")
+							|| inputs[i].equals("atan")) {
 						function(inputs[i], stack);
-						continue;
-					}
-
-					else {
+					} else if (inputs[i].equals("+") || inputs[i].equals("-") || inputs[i].equals("*")
+							|| inputs[i].equals("/") || inputs[i].equals("^")) {
 						operator(stack, inputs[i]);
+					} else {
+						System.out.println("ERROR: Invalid input");
 					}
-
 				}
 			}
+		} catch (
 
-			reader.close();
-		} catch (Exception e) {
+		Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private static void function(String string, Stack<Double> stack) {
-		double num = stack.pop();
-		switch (string) {
-		case "s":
-			stack.push(num * num);
+	private static void commands(String input, Stack<Double> stack, DecimalFormat df) {
+		switch (input) {
+		case "e":
+			System.exit(0);
+			;
 			break;
-		case "sin":
-			stack.push(Math.sin(Math.toRadians(num)));
-			break;
-		case "cos":
-			stack.push(Math.cos(Math.toRadians(num)));
-			break;
-		case "tan":
-			stack.push(Math.tan(Math.toRadians(num)));
+		case "p":
+			if (stack.size() > 0) {
+				System.out.println(df.format(stack.peek()));
+				break;
+			} else {
+				System.out.println("ERROR: All Stacks Empty");
+				break;
+			}
+		case "c":
+			stack.clear();
 			break;
 		}
 
 	}
 
-	private static boolean isFunction(String input) {
-		if (input.equals("s") || input.equals("sin") || input.equals("cos") || input.equals("tan")) {
-			return true;
+	private static void function(String string, Stack<Double> stack) {
+		if (stack.size() > 0) {
+			double num = stack.pop();
+			switch (string) {
+			case "sq":
+				stack.push(num * num);
+				break;
+			case "sin":
+				stack.push(Math.sin(Math.toRadians(num)));
+				break;
+			case "cos":
+				stack.push(Math.cos(Math.toRadians(num)));
+				break;
+			case "tan":
+				stack.push(Math.tan(Math.toRadians(num)));
+				break;
+			case "asin":
+				stack.push(Math.asin(Math.toRadians(num)));
+				break;
+			case "acos":
+				stack.push(Math.acos(Math.toRadians(num)));
+				break;
+			case "atan":
+				stack.push(Math.atan(Math.toRadians(num)));
+				break;
+			}
 		}
-		return false;
 	}
 
 	private static void operator(Stack<Double> stack, String input) {
-		double num2 = stack.pop();
-		double num1 = stack.pop();
-		switch (input) {
-		case "+":
-			stack.push(num1 + num2);
-			break;
-		case "-":
-			stack.push(num1 - num2);
-			break;
-		case "*":
-			stack.push(num1 * num2);
-			break;
-		case "/":
-			stack.push(num1 / num2);
-			break;
-		case "^":
-			stack.push(Math.pow(num1, num2));
-			break;
+		if (stack.size() > 1) {
+			double num2 = stack.pop();
+			double num1 = stack.pop();
+			switch (input) {
+			case "+":
+				stack.push(num1 + num2);
+				break;
+			case "-":
+				stack.push(num1 - num2);
+				break;
+			case "*":
+				stack.push(num1 * num2);
+				break;
+			case "/":
+				stack.push(num1 / num2);
+				break;
+			case "^":
+				stack.push(Math.pow(num1, num2));
+				break;
+			}
+		} else {
+			System.out.println("ERROR: Can't operate on an empty stack");
 		}
 	}
 
 	private static boolean isNumber(String input) {
-		if (input.equals("+") || input.equals("-") || input.equals("*") || input.equals("/") || input.equals("s")
-				|| input.equals("^") || input.equals("sin") || input.equals("cos") || input.equals("tan")) {
+		try {
+			Double.parseDouble(input);
+			return true;
+		} catch (Exception e) {
 			return false;
 		}
-		return true;
 	}
 
 }
