@@ -75,6 +75,7 @@ public class RPNcli {
 			switch (input) {
 			case "sq":
 				ans = num * num;
+				break;
 			case "sin":
 				ans = Math.sin(rads);
 				break;
@@ -85,13 +86,13 @@ public class RPNcli {
 				ans = Math.tan(rads);
 				break;
 			case "asin":
-				ans = Math.asin(rads);
+				ans = Math.toDegrees(Math.asin(num));
 				break;
 			case "acos":
-				ans = Math.acos(rads);
+				ans = Math.toDegrees(Math.acos(num));
 				break;
 			case "atan":
-				ans = Math.atan(rads);
+				ans = Math.toDegrees(Math.atan(num));
 				break;
 			}
 			stack.push(ans);
