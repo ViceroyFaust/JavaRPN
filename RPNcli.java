@@ -21,7 +21,7 @@ public class RPNcli {
         String[] parts = input.split(" ");
         for (int i = 0; i < parts.length; i++) {
             try {
-                Double num = Double.parseDouble(input);
+                Double num = Double.parseDouble(parts[i]);
                 stack.push(num);
             } catch (NumberFormatException ex) { 
                 operation(parts[i]);
