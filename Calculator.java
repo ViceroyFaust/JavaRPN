@@ -54,10 +54,10 @@ public class Calculator {
 				ans = Math.toDegrees(Math.atan(num));
 				break;
 			case "sqrt":
-				ans = Math.pow(num, 1.0 / 2);
+				ans = Math.sqrt(num);
 				break;
 			case "cbrt":
-				ans = Math.pow(num, 1.0 / 3);
+				ans = Math.cbrt(num);
 				break;
 			case "*%":
 				ans = num * 100;
