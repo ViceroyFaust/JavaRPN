@@ -17,6 +17,11 @@ Since this is an RPN calculator, the syntax for "(5 + 3) / (5 * 8)" would be "5 
 | *       | multiply stack 2 and 1 |
 | /       | divide stack 2 by stack 1 |
 | ^       | raise stack 2 to a power value of stack 1 |
+| %       | stack 2 modulus stack 1 |
+| *%      | Multiplies stack 1 by 100 |
+| rt      | stack 2 to the root of stack 1 |
+| sqrt    | square root of stack 1 |
+| cbrt    | cube root of stack 1 |
 | sin     | apply sin to stack 1 in degrees |
 | cos     | apply cos to stack 1 in degrees |
 | tan     | apply tan to stack 1 in degrees |
@@ -25,13 +30,10 @@ Since this is an RPN calculator, the syntax for "(5 + 3) / (5 * 8)" would be "5 
 | atan    | apply asin to stack 1 in degrees |
 
 ## To Do:
-- Add square root and cube root functions
 - Add a roll feature, meaning the user can "roll" the stacks down
-- Add a percent feature
 - Add the factorial function
 - Add logarithms (including natural logs)
 - Add "save to memory" function
-- Add a modulus operation
 - Add Radian support
 - Add Scientific Notation support
 
