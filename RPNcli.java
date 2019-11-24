@@ -8,39 +8,39 @@ import java.util.Set;
 import java.util.Deque;
 
 public class RPNcli {
-	private final Set<String> commands = new HashSet<>(Arrays.asList("p", "e", "c", "pop", "swap"));
+	private final Set<String> commands = new HashSet<>(Arrays.asList("p", "e", "c", "pop", "swap", "roll", "pall"));
 	private Deque<Double> stack;
 	private Calculator calc;
-	
-	public RPNcli () {
+
+	public RPNcli() {
 		this.stack = new ArrayDeque<>();
 		this.calc = new Calculator(stack);
 	}
-	
+
 	public void parse(String input) {
-        String[] parts = input.split(" ");
-        for (int i = 0; i < parts.length; i++) {
-            try {
-                Double num = Double.parseDouble(parts[i]);
-                stack.push(num);
-            } catch (NumberFormatException ex) { 
-                operation(parts[i]);
-            }
-        }
-    }
+		String[] parts = input.split(" ");
+		for (int i = 0; i < parts.length; i++) {
+			try {
+				Double num = Double.parseDouble(parts[i]);
+				stack.push(num);
+			} catch (NumberFormatException ex) {
+				operation(parts[i]);
+			}
+		}
+	}
 
 	private void operation(String input) {
-        if (calc.contains(input)) {
-            calc.calculate(input);
-        } else {
-            if (commands.contains(input)) {
-                command(input);
-            } else {
-                System.out.println("ERROR: Invalid Command");
-            }
-        }
-    }
-	
+		if (calc.contains(input)) {
+			calc.calculate(input);
+		} else {
+			if (commands.contains(input)) {
+				command(input);
+			} else {
+				System.out.println("ERROR: Invalid Command");
+			}
+		}
+	}
+
 	private void command(String input) {
 		DecimalFormat df = new DecimalFormat("#,###.#########");
 		switch (input) {
@@ -68,8 +68,17 @@ public class RPNcli {
 				double num1 = stack.pop();
 				stack.push(num2);
 				stack.push(num1);
-			} else
+			} else {
 				System.out.println("ERROR: can't swap empty stack");
+			}
+			break;
+		case "roll":
+			double num = stack.pop();
+			stack.addLast(num);
+			break;
+		case "pall":
+			System.out.println(Arrays.toString(stack.toArray()));
+			break;
 		}
 
 	}
