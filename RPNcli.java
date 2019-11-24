@@ -7,16 +7,30 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Deque;
 
+/**
+ * The RPNcli Object is responsible for parsing the CLI input and for executing
+ * commands.
+ * 
+ * @author D. F. Owl
+ */
 public class RPNcli {
 	private final Set<String> commands = new HashSet<>(Arrays.asList("p", "e", "c", "pop", "swap", "roll", "pall"));
 	private Deque<Double> stack;
 	private Calculator calc;
 
+	/**
+	 * the class constructor initialises the stack and calc objects
+	 */
 	public RPNcli() {
 		this.stack = new ArrayDeque<>();
 		this.calc = new Calculator(stack);
 	}
 
+	/**
+	 * The method responsible for parsing the input data. If a number, pushes it to the stack
+	 * 
+	 * @param input
+	 */
 	public void parse(String input) {
 		String[] parts = input.split(" ");
 		for (int i = 0; i < parts.length; i++) {
@@ -29,6 +43,10 @@ public class RPNcli {
 		}
 	}
 
+	/**
+	 * The method decides whether the non-numeral input is a command or an operator
+	 * @param input
+	 */
 	private void operation(String input) {
 		if (calc.contains(input)) {
 			calc.calculate(input);
@@ -40,7 +58,10 @@ public class RPNcli {
 			}
 		}
 	}
-
+	/**
+	 * The method is responsible for executing commands which do not return any value
+	 * @param input
+	 */
 	private void command(String input) {
 		DecimalFormat df = new DecimalFormat("#,###.#########");
 		switch (input) {

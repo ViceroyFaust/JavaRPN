@@ -4,6 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * The JavaRPN calculator. The input is inspired by the old Unix dc calculator
+ * program. All standard RPN rules apply.
+ * 
+ * @author D. F. Owl
+ * @version in-development
+ */
 public class Main {
 
 	public static void main(String[] args) {
