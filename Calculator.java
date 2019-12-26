@@ -13,18 +13,18 @@ import java.util.Set;
  */
 
 public class Calculator {
-	private final static Set<String> simples = new HashSet<>(Arrays.asList("+", "-", "*", "/", "^", "rt", "%"));
-	private final static Set<String> functions = new HashSet<>(Arrays.asList("sin", "cos", "tan", "asin", "acos", "atan", "sq", "sqrt", "cbrt", "*%"));
-	private static Deque<Double> stack;
+	private final Set<String> simples = new HashSet<>(Arrays.asList("+", "-", "*", "/", "^", "rt", "%"));
+	private final Set<String> functions = new HashSet<>(Arrays.asList("sin", "cos", "tan", "asin", "acos", "atan", "sq", "sqrt", "cbrt", "*%"));
+	private Deque<Double> stack;
 
 	/**
 	 * The Calculator constructor constructs the local stack based on a previously
 	 * declared stack
 	 * 
-	 * @param stack
+	 * @param input
 	 */
-	public Calculator(Deque<Double> stack) {
-		Calculator.stack = stack;
+	public Calculator(Deque<Double> input) {
+		stack = input;
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class Calculator {
 	 * 
 	 * @param input
 	 */
-	private static void function(String input) {
+	private void function(String input) {
 		if (stack.size() > 0) {
 			double num = (double) stack.pop();
 			double rads = Math.toRadians(num);
@@ -103,8 +103,8 @@ public class Calculator {
 	 * 
 	 * @param input
 	 */
-	private static void simple(String input) {
-		if (stack.size() > 1) {
+	private void simple(String input) {
+		if (this.stack.size() > 1) {
 			double num2 = (double) stack.pop();
 			double num1 = (double) stack.pop();
 			double ans = 0;
