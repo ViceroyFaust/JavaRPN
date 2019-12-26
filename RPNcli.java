@@ -9,12 +9,12 @@ import java.util.Deque;
 
 /**
  * The RPNcli Object is responsible for parsing the CLI input and for executing
- * commands.
+ * commands. Number operations are passed down to the Calculator object.
  * 
  * @author D. F. Owl
  */
 public class RPNcli {
-	private final Set<String> commands = new HashSet<>(Arrays.asList("p", "e", "c", "pop", "swap", "roll", "pall"));
+	private final Set<String> commands = new HashSet<>(Arrays.asList("p", "exit", "c", "pop", "swap", "roll", "pall"));
 	private Deque<Double> stack;
 	private Calculator calc;
 
@@ -27,7 +27,8 @@ public class RPNcli {
 	}
 
 	/**
-	 * The method responsible for parsing the input data. If a number, pushes it to the stack
+	 * The method responsible for parsing the input data. If a number, pushes it to
+	 * the stack
 	 * 
 	 * @param input
 	 */
@@ -37,7 +38,7 @@ public class RPNcli {
 			try {
 				Double num = Double.parseDouble(parts[i]);
 				stack.push(num);
-			} catch (NumberFormatException ex) {
+			} catch (NumberFormatException e) {
 				operation(parts[i]);
 			}
 		}
@@ -45,6 +46,7 @@ public class RPNcli {
 
 	/**
 	 * The method decides whether the non-numeral input is a command or an operator
+	 * 
 	 * @param input
 	 */
 	private void operation(String input) {
@@ -58,14 +60,17 @@ public class RPNcli {
 			}
 		}
 	}
+
 	/**
-	 * The method is responsible for executing commands which do not return any value
+	 * The method is responsible for executing commands which do not return any
+	 * value
+	 * 
 	 * @param input
 	 */
 	private void command(String input) {
 		DecimalFormat df = new DecimalFormat("#,###.#########");
 		switch (input) {
-		case "e":
+		case "exit":
 			System.exit(0);
 			break;
 		case "p":

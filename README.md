@@ -7,7 +7,7 @@ Since this is an RPN calculator, the syntax for "(5 + 3) / (5 * 8)" would be "5 
 ## Commands
 | command | function          |
 | :-----: | :---------------: |
-| e       | exit              |
+| exit    | exit the program  |
 | p       | peek top of stack |
 | c       | clear             |
 | pop     | pop top of stack  |
