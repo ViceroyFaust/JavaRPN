@@ -6,7 +6,7 @@ Since this is an RPN calculator, the syntax for "(5 + 3) / (5 * 8)" would be "5 
 
 ## Commands
 | command | function          |
-| :-----: | :---------------: |
+| :-----: | :---------------- |
 | exit    | exit the program  |
 | p       | peek top of stack |
 | c       | clear             |
@@ -21,6 +21,7 @@ Since this is an RPN calculator, the syntax for "(5 + 3) / (5 * 8)" would be "5 
 | ^       | raise stack 2 to a power value of stack 1 |
 | %       | stack 2 modulus stack 1 |
 | *%      | Multiplies stack 1 by 100 |
+| !       | Apply factorial function to working stack |
 | rt      | stack 2 to the root of stack 1 |
 | sqrt    | square root of stack 1 |
 | cbrt    | cube root of stack 1 |
@@ -32,11 +33,9 @@ Since this is an RPN calculator, the syntax for "(5 + 3) / (5 * 8)" would be "5 
 | atan    | apply asin to stack 1 in degrees |
 
 ## To Do:
-- Add the factorial function
 - Add logarithms (including natural logs)
-- Add "save to memory" function
 - Add Radian support
-- Add Scientific Notation support
+- Add Scientific Notation support (for input)
 
 ## Inquiries and Recommendations
 If you have anything you would like to see added to this little project of mine, please email me at:

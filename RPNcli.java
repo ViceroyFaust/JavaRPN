@@ -15,6 +15,8 @@ import java.util.Deque;
  */
 public class RPNcli {
 	private final Set<String> commands = new HashSet<>(Arrays.asList("p", "exit", "c", "pop", "swap", "roll", "pall"));
+	private final DecimalFormat df = new DecimalFormat("#,###.#########");
+	private final DecimalFormat Sci = new DecimalFormat("0.#########E0");
 	private Deque<Double> stack;
 	private Calculator calc;
 
@@ -68,14 +70,18 @@ public class RPNcli {
 	 * @param input
 	 */
 	private void command(String input) {
-		DecimalFormat df = new DecimalFormat("#,###.#########");
 		switch (input) {
 		case "exit":
 			System.exit(0);
 			break;
 		case "p":
 			if (stack.size() > 0) {
-				System.out.println(df.format(stack.peek()));
+				double num = stack.peek();
+				if (num > 1000000000) {
+					System.out.println(Sci.format(num));
+				} else {
+					System.out.println(df.format(num));
+				}
 			} else
 				System.out.println("ERROR: no stacks to peek");
 			break;
