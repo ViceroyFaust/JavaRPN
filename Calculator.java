@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class Calculator {
 	private final Set<String> simples = new HashSet<>(Arrays.asList("+", "-", "*", "/", "^", "rt", "%"));
-	private final Set<String> functions = new HashSet<>(Arrays.asList("sin", "cos", "tan", "asin", "acos", "atan", "sq", "sqrt", "cbrt", "*%", "!"));
+	private final Set<String> functions = new HashSet<>(Arrays.asList("sin", "cos", "tan", "asin", "acos", "atan", "sq", "sqrt", "cbrt", "*%", "!", "log", "ln"));
 	private Deque<Double> stack;
 
 	/**
@@ -96,6 +96,12 @@ public class Calculator {
 				for (double i = num; i > 0; i -= 1) {
 					ans *= i;
 				}
+				break;
+			case "log":
+				ans = Math.log10(num);
+				break;
+			case "ln":
+				ans = Math.log(num);
 				break;
 			}
 			stack.push(ans);

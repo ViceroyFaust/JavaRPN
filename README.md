@@ -31,16 +31,17 @@ Since this is an RPN calculator, the syntax for "(5 + 3) / (5 * 8)" would be "5 
 | asin    | apply asin to stack 1 in degrees |
 | acos    | apply acos to stack 1 in degrees |
 | atan    | apply asin to stack 1 in degrees |
+| log     | Base 10 logarithm of working stack |
+| ln      | Natural Logarithm of working stack |
 
 ## To Do:
-- Add logarithms (including natural logs)
 - Add Radian support
 - Add Constant support (Pi, e)
 
 ## Inquiries and Recommendations
 If you have anything you would like to see added to this little project of mine, please email me at:
 
-`d [dot] ribchinski [at] google mail [dot] com`
+`d [dot] ribchinski [at] googlemail [dot] com`
 
 
 [1]: https://en.m.wikipedia.org/wiki/Reverse_Polish_notation
