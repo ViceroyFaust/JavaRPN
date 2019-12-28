@@ -77,7 +77,7 @@ public class RPNcli {
 		case "p":
 			if (stack.size() > 0) {
 				double num = stack.peek();
-				if (num > 1E7) {
+				if (num > 1E7 || num < 1E-5) {
 					System.out.println(Sci.format(num));
 				} else {
 					System.out.println(df.format(num));

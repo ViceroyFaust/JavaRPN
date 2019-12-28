@@ -35,6 +35,7 @@ Since this is an RPN calculator, the syntax for "(5 + 3) / (5 * 8)" would be "5 
 ## To Do:
 - Add logarithms (including natural logs)
 - Add Radian support
+- Add Constant support (Pi, e)
 
 ## Inquiries and Recommendations
 If you have anything you would like to see added to this little project of mine, please email me at:
