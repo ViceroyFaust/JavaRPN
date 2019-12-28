@@ -18,7 +18,7 @@ public class Main {
 			System.out.println("JavaRPN: Input numbers and operands separated by newline or space");
 			RPNcli cli = new RPNcli();
 			while (true) {
-				String input = reader.readLine();
+				String input = reader.readLine().trim();
 				cli.parse(input);
 			}
 		} catch (IOException io) {
