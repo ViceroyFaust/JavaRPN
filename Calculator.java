@@ -15,6 +15,7 @@ import java.util.Set;
 public class Calculator {
 	private final Set<String> simples = new HashSet<>(Arrays.asList("+", "-", "*", "/", "^", "rt", "%"));
 	private final Set<String> functions = new HashSet<>(Arrays.asList("sin", "cos", "tan", "asin", "acos", "atan", "sq", "sqrt", "cbrt", "*%", "!", "log", "ln"));
+	private final Set<String> constants = new HashSet<>(Arrays.asList("e", "pi"));
 	private Deque<Double> stack;
 
 	/**
@@ -34,7 +35,7 @@ public class Calculator {
 	 * @return boolean
 	 */
 	public boolean contains(String input) {
-		return simples.contains(input) || functions.contains(input);
+		return simples.contains(input) || functions.contains(input) || constants.contains(input);
 	}
 
 	/**
@@ -45,8 +46,26 @@ public class Calculator {
 	public void calculate(String input) {
 		if (simples.contains(input)) {
 			simple(input);
-		} else {
+		} else if (functions.contains(input)){
 			function(input);
+		} else {
+			constant(input);
+		}
+	}
+	
+	/**
+	 * Pushes the user requested constant onto the stack, such as PI or E
+	 * 
+	 * @param input
+	 */
+	private void constant(String input) {
+		switch(input) {
+		case "e":
+			stack.push(Math.E);
+			break;
+		case "pi":
+			stack.push(Math.PI);
+			break;
 		}
 	}
 
