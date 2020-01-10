@@ -33,10 +33,11 @@ Since this is an RPN calculator, the syntax for "(5 + 3) / (5 * 8)" would be "5 
 | atan    | apply asin to stack 1 in degrees |
 | log     | Base 10 logarithm of working stack |
 | ln      | Natural Logarithm of working stack |
+| pi      | pushes pi onto the stack |
+| e       | pushes the constant e to the stack |
 
 ## To Do:
 - Add Radian support
-- Add Constant support (Pi, e)
 
 ## Inquiries and Recommendations
 If you have anything you would like to see added to this little project of mine, please email me at:
