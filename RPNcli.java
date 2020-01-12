@@ -14,7 +14,7 @@ import java.util.Deque;
  * @author D. F. Owl
  */
 public class RPNcli {
-	private final Set<String> commands = new HashSet<>(Arrays.asList("p", "exit", "c", "pop", "swap", "roll", "pall"));
+	private final Set<String> commands = new HashSet<>(Arrays.asList("p", "exit", "c", "pop", "swap", "roll", "pall", "degree", "radian"));
 	private final DecimalFormat df = new DecimalFormat("#,###.#########");
 	private final DecimalFormat Sci = new DecimalFormat("0.#########E0");
 	private Deque<Double> stack;
@@ -110,6 +110,12 @@ public class RPNcli {
 			break;
 		case "pall":
 			System.out.println(Arrays.toString(stack.toArray()));
+			break;
+		case "degree":
+			calc.setAngle(false);
+			break;
+		case "radian":
+			calc.setAngle(true);
 			break;
 		}
 

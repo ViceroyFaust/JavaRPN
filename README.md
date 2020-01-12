@@ -35,9 +35,14 @@ Since this is an RPN calculator, the syntax for "(5 + 3) / (5 * 8)" would be "5 
 | ln      | Natural Logarithm of working stack |
 | pi      | pushes pi onto the stack |
 | e       | pushes the constant e to the stack |
+| degree  | sets the calculator to degree mode |
+| radian  | sets the calculator to radian mode |
+| toDeg   | Updates the working stack to degrees |
+| toRad   | Updates the working stack to radians |
 
 ## To Do:
-- Add Radian support
+- Add support for terminal arguments
+- Add support for a "settings" file
 
 ## Inquiries and Recommendations
 If you have anything you would like to see added to this little project of mine, please email me at:

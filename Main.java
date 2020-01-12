@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
  * program. All standard RPN rules apply.
  * 
  * @author D. F. Owl
- * @version in-development
+ * @version 1.0
  */
 public class Main {
 
