@@ -25,12 +25,12 @@ Since this is an RPN calculator, the syntax for "(5 + 3) / (5 * 8)" would be "5 
 | rt      | stack 2 to the root of stack 1 |
 | sqrt    | square root of stack 1 |
 | cbrt    | cube root of stack 1 |
-| sin     | apply sin to stack 1 in degrees |
-| cos     | apply cos to stack 1 in degrees |
-| tan     | apply tan to stack 1 in degrees |
-| asin    | apply asin to stack 1 in degrees |
-| acos    | apply acos to stack 1 in degrees |
-| atan    | apply asin to stack 1 in degrees |
+| sin     | apply sin to stack 1 |
+| cos     | apply cos to stack 1 |
+| tan     | apply tan to stack 1 |
+| asin    | apply asin to stack 1 |
+| acos    | apply acos to stack 1 |
+| atan    | apply asin to stack 1 |
 | log     | Base 10 logarithm of working stack |
 | ln      | Natural Logarithm of working stack |
 | pi      | pushes pi onto the stack |
