@@ -1,5 +1,5 @@
 # JavaRPN
-A CLI based RPN calculator. Inspired by Unix dc, but supports decimals.
+A CLI calculator made in Java for a unix-style terminal. The equation syntax is RPN, and supports 64-bit numbers. Unlike Unix' original program, dc, this is _not_ an arbitrary precision calculator.
 
 ## Syntax
 Since this is an RPN calculator, the syntax for "(5 + 3) / (5 * 8)" would be "5 3 + 5 8 * /". If you would like to know more about RPN, I recommend you read this [wikipedia][1] or this [tutorial][2] article.
