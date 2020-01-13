@@ -1,8 +1,15 @@
 # JavaRPN
-A CLI calculator made in Java for a unix-style terminal. The equation syntax is RPN, and supports 64-bit numbers. Unlike Unix' original program, dc, this is _not_ an arbitrary precision calculator.
+A CLI calculator made in Java for a unix-style terminal. The equation syntax is RPN, and supports 64-bit numbers. Unlike Unix' original program, `dc`, this is **_not_** an arbitrary precision calculator.
 
 ## Syntax
-Since this is an RPN calculator, the syntax for "(5 + 3) / (5 * 8)" would be "5 3 + 5 8 * /". If you would like to know more about RPN, I recommend you read this [wikipedia][1] or this [tutorial][2] article.
+Since this is an RPN calculator, the syntax for `(5 + 3) / (5 * 8)` would be `5 3 + 5 8 * /`. If you would like to know more about RPN, I recommend you read this [wikipedia][1] or this [tutorial][2] article.
+
+## Installation
+Just download the RPN.jar under releases and run it with `java -jar [location of jar]`. If you want to run this program as a command, go to your .bash_profile (if using Bash) or .zprofile (if using Zsh), and write:
+
+```alias calculator='java -jar [location of jar]```
+
+Afterwards, this program will run as any other command when you type in calculator.
 
 ## Commands
 | command | function          |
