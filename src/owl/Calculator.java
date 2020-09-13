@@ -1,191 +1,134 @@
 package owl;
 
+import org.apfloat.Apfloat;
+import org.apfloat.ApfloatMath;
+
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
-import java.util.HashSet;
-import java.util.Set;
-
-/**
- * Calculator is responsible for executing operations and functions, pushing
- * resulting values to the stack
- * 
- * @author D. F. Owl
- */
 
 public class Calculator {
-	private final Set<String> simples = new HashSet<>(Arrays.asList("+", "-", "*", "/", "^", "rt", "%"));
-	private final Set<String> functions = new HashSet<>(Arrays.asList("sin", "cos", "tan", "asin", "acos", "atan", "sq", "sqrt", "cbrt", "*%", "!", "log", "ln", "toDeg", "toRad"));
-	private final Set<String> constants = new HashSet<>(Arrays.asList("e", "pi"));
-	private Deque<Double> stack;
-	private boolean radian;
+    private final Deque<Apfloat> stack;
+    private boolean isRadian;
+    private long precision;
+    private int radix;
 
-	/**
-	 * The Calculator constructor constructs the local stack based on a previously
-	 * declared stack
-	 * 
-	 * @param input
-	 */
-	public Calculator(Deque<Double> inStack) {
-		stack = inStack;
-		radian = true;
-	}
+    /**
+     * Constructs the calculator object, which computes and stores numbers in a stack. All operations follow the basic
+     * RPN procedures.
+     * @param isRadian sets the mode to either Radian or Degree for Trig. functions
+     * @param precision sets the precision of the calculator
+     * @param radix sets the base of the number system
+     */
+    public Calculator(boolean isRadian, long precision, int radix) {
+        stack = new ArrayDeque<>();
+        this.isRadian = isRadian;
+        this.precision = precision;
+        this.radix = radix;
+    }
 
-	/**
-	 * The method scans what type of operation the input is
-	 * 
-	 * @param input
-	 * @return boolean
-	 */
-	public boolean contains(String input) {
-		return simples.contains(input) || functions.contains(input) || constants.contains(input);
-	}
+    public Calculator(boolean isRadian, long precision) {
+        this(isRadian, precision, 10);
+    }
 
-	/**
-	 * Directs the input to simples or functions depending on what the input is
-	 * 
-	 * @param input
-	 */
-	public void calculate(String input) {
-		if (simples.contains(input)) {
-			simple(input);
-		} else if (functions.contains(input)) {
-			function(input);
-		} else {
-			constant(input);
-		}
-	}
+    public Calculator(boolean isRadian) {
+        this(isRadian, 1, 10);
+    }
 
-	/**
-	 * Pushes the user requested constant onto the stack, such as PI or E
-	 * 
-	 * @param input
-	 */
-	private void constant(String input) {
-		switch (input) {
-		case "e":
-			stack.push(Math.E);
-			break;
-		case "pi":
-			stack.push(Math.PI);
-			break;
-		}
-	}
+    public Calculator(long precision) {
+        this(true, precision, 10);
+    }
 
-	/**
-	 * Performs operations on the stack which requires the pop stack to be popped.
-	 * 
-	 * @param input
-	 */
-	private void function(String input) {
-		if (stack.size() > 0) {
-			double num = (double) stack.pop();
-			double angle = num;
-			if (!radian) {
-				angle = Math.toRadians(num);
-			}
-			double ans = 0;
-			switch (input) {
-			case "sq":
-				ans = num * num;
-				break;
-			case "sin":
-				ans = Math.sin(angle);
-				break;
-			case "cos":
-				ans = Math.cos(angle);
-				break;
-			case "tan":
-				ans = Math.tan(angle);
-				break;
-			case "asin":
-				ans = Math.asin(num);
-				break;
-			case "acos":
-				ans = Math.acos(num);
-				break;
-			case "atan":
-				ans = Math.atan(num);
-				break;
-			case "sqrt":
-				ans = Math.sqrt(num);
-				break;
-			case "cbrt":
-				ans = Math.cbrt(num);
-				break;
-			case "*%":
-				ans = num * 100;
-				break;
-			case "!":
-				ans = 1;
-				for (double i = num; i > 0; i -= 1) {
-					ans *= i;
-				}
-				break;
-			case "log":
-				ans = Math.log10(num);
-				break;
-			case "ln":
-				ans = Math.log(num);
-				break;
-			case "toDeg":
-				ans = Math.toDegrees(num);
-				break;
-			case "toRad":
-				ans = Math.toRadians(num);
-				break;
-			}
-			if ((input.equals("asin") || input.equals("acos") || input.equals("atan")) && !radian) {
-				stack.push(Math.toDegrees(ans));
-			} else {
-				stack.push(ans);
-			}
-		} else
-			System.out.println("ERROR: can't operate on empty stack");
-	}
+    public Calculator() {
+        this(true, 1, 10);
+    }
 
-	/**
-	 * The method executes basic operations such as +, -, *, and /. All of the
-	 * operations here will require at least two numbers to be popped off the stack
-	 * 
-	 * @param input
-	 */
-	private void simple(String input) {
-		if (this.stack.size() > 1) {
-			double num2 = (double) stack.pop();
-			double num1 = (double) stack.pop();
-			double ans = 0;
-			switch (input) {
-			case "+":
-				ans = num1 + num2;
-				break;
-			case "-":
-				ans = num1 - num2;
-				break;
-			case "*":
-				ans = num1 * num2;
-				break;
-			case "/":
-				ans = num1 / num2;
-				break;
-			case "^":
-				ans = Math.pow(num1, num2);
-				break;
-			case "rt":
-				ans = Math.pow(num1, (1.0 / num2));
-				break;
-			case "%":
-				ans = num1 % num2;
-				break;
-			}
-			stack.push(ans);
-		} else
-			System.out.println("ERROR: can't operate on empty stack");
-	}
-	/**
-	 * Updates the radian or degree option for the Calculator; true = radian; false = degree.
-	 * @param isRadian
-	 */
-	public void setAngle(boolean isRadian) {
-		radian = isRadian;
-	}
+    public void push(String num) {
+        stack.push(new Apfloat(num, precision, radix));
+    }
+
+    public Apfloat pop() {
+        return stack.pop();
+    }
+
+    public void clear() {
+        stack.clear();
+    }
+
+    public Apfloat peek() {
+        return stack.peek();
+    }
+
+    public void swap() {
+        // Pop the X and Y stacks
+        Apfloat num1 = stack.pop();
+        Apfloat num2 = stack.pop();
+        // Push Y onto X and vice versa
+        stack.push(num2);
+        stack.push(num1);
+    }
+
+    public void roll() {
+        stack.addLast(stack.pop());
+    }
+
+    public void add() {
+        stack.push(stack.pop().add(stack.pop()));
+    }
+
+    public void subtract() {
+        Apfloat num2 = stack.pop();
+        Apfloat num1 = stack.pop();
+        stack.push(num1.subtract(num2));
+    }
+
+    public void multiply() {
+        stack.push(stack.pop().multiply(stack.pop()));
+    }
+
+    public void divide() {
+        Apfloat num2 = stack.pop();
+        Apfloat num1 = stack.pop();
+        stack.push(num1.divide(num2));
+    }
+
+    public void mod() {
+        Apfloat num2 = stack.pop();
+        Apfloat num1 = stack.pop();
+        stack.push(ApfloatMath.fmod(num1, num2));
+    }
+
+    public void setPrecision() {
+        precision = stack.pop().longValue();
+    }
+
+    public void setRadix() {
+        radix = stack.pop().intValue();
+    }
+
+    public void degreeMode(){
+        isRadian = false;
+    }
+
+    public void radianMode() {
+        isRadian = true;
+    }
+
+    public void sin() {
+        stack.push(ApfloatMath.sin((stack.pop())));
+    }
+
+    public void cos() {
+        stack.push(ApfloatMath.cos(stack.pop()));
+    }
+
+    public void tan() {
+        stack.push(ApfloatMath.tan(stack.pop()));
+    }
+
+    public String toString() {
+        return Arrays.toString(stack.toArray());
+    }
+
+
 }
