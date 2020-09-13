@@ -19,6 +19,8 @@ Afterwards, this program will run as any other command when you type in `calcula
 | swap    | swap stack Y and X|
 | roll    | roll stack 1 element down |
 | pall    | print entire stack. First element is the Head of the stack, and last is the tail. |
+| radix   | sets the calculator's radix to the value of stack X |
+| prec    | sets the calculator's precision to the value of stack X |
 | +       | add stack X and Y |
 | -       | subtract stack X from stack Y |
 | *       | multiply stack X and Y |

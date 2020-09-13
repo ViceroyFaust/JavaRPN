@@ -6,6 +6,7 @@ import org.apfloat.ApfloatMath;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
+import java.util.NoSuchElementException;
 
 public class Calculator {
     private final Deque<Apfloat> stack;
@@ -48,7 +49,13 @@ public class Calculator {
     }
 
     public Apfloat pop() {
-        return stack.pop();
+        try {
+            return stack.pop();
+        } catch (NoSuchElementException e) {
+            // In case of an empty stack, always pop and peek a 0. Infinite precision will be canceled out by
+            // later calculations done by the user
+            return new Apfloat(0);
+        }
     }
 
     public void clear() {
@@ -56,7 +63,13 @@ public class Calculator {
     }
 
     public Apfloat peek() {
-        return stack.peek();
+        try {
+            return stack.peek();
+        } catch (NoSuchElementException e) {
+            // In case of an empty stack, always pop and peek a 0. Infinite precision will be canceled out by
+            // later calculations done by the user
+            return new Apfloat(0);
+        }
     }
 
     public void swap() {
@@ -73,37 +86,37 @@ public class Calculator {
     }
 
     public void add() {
-        stack.push(stack.pop().add(stack.pop()));
+        stack.push(pop().add(pop()));
     }
 
     public void subtract() {
-        Apfloat num2 = stack.pop();
-        Apfloat num1 = stack.pop();
+        Apfloat num2 = pop();
+        Apfloat num1 = pop();
         stack.push(num1.subtract(num2));
     }
 
     public void multiply() {
-        stack.push(stack.pop().multiply(stack.pop()));
+        stack.push(pop().multiply(pop()));
     }
 
     public void divide() {
-        Apfloat num2 = stack.pop();
-        Apfloat num1 = stack.pop();
+        Apfloat num2 = pop();
+        Apfloat num1 = pop();
         stack.push(num1.divide(num2));
     }
 
     public void mod() {
-        Apfloat num2 = stack.pop();
-        Apfloat num1 = stack.pop();
+        Apfloat num2 = pop();
+        Apfloat num1 = pop();
         stack.push(ApfloatMath.fmod(num1, num2));
     }
 
     public void setPrecision() {
-        precision = stack.pop().longValue();
+        precision = pop().longValue();
     }
 
     public void setRadix() {
-        radix = stack.pop().intValue();
+        radix = pop().intValue();
     }
 
     public void degreeMode(){
@@ -115,15 +128,51 @@ public class Calculator {
     }
 
     public void sin() {
-        stack.push(ApfloatMath.sin((stack.pop())));
+        if (isRadian) { // ApfloatMath uses Radians per default
+            stack.push(ApfloatMath.sin((pop())));
+        } else { // Convert input to radians then push output
+            stack.push(ApfloatMath.sin(ApfloatMath.toRadians(pop())));
+        }
     }
 
     public void cos() {
-        stack.push(ApfloatMath.cos(stack.pop()));
+        if (isRadian) { // ApfloatMath uses Radians per default
+            stack.push(ApfloatMath.cos(pop()));
+        } else { // Convert input to radians then push output
+            stack.push(ApfloatMath.cos(ApfloatMath.toRadians(pop())));
+        }
     }
 
     public void tan() {
-        stack.push(ApfloatMath.tan(stack.pop()));
+        if (isRadian) { // ApfloatMath uses Radians per default
+            stack.push(ApfloatMath.tan(pop()));
+        } else { // Convert input to radians then push output
+            stack.push(ApfloatMath.tan(ApfloatMath.toRadians(pop())));
+        }
+    }
+
+    public void asin() {
+        if (isRadian) { // ApfloatMath uses Radians per default
+            stack.push(ApfloatMath.asin((pop())));
+        } else { // Convert input to radians then push output
+            stack.push(ApfloatMath.toDegrees(ApfloatMath.asin(pop())));
+        }
+    }
+
+    public void acos() {
+        if (isRadian) { // ApfloatMath uses Radians per default
+            stack.push(ApfloatMath.acos((pop())));
+        } else { // Convert input to radians then push output
+            stack.push(ApfloatMath.toDegrees(ApfloatMath.acos(pop())));
+        }
+    }
+
+    public void atan() {
+        if (isRadian) { // ApfloatMath uses Radians per default
+            stack.push(ApfloatMath.atan((pop())));
+        } else { // Convert input to radians then push output
+            stack.push(ApfloatMath.toDegrees(ApfloatMath.atan(pop())));
+        }
     }
 
     public String toString() {
