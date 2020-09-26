@@ -48,7 +48,8 @@ public class Calculator {
         stack.push(new Apfloat(num, precision, radix));
     }
 
-    public Apfloat pop() {
+
+    public Apfloat pop() { // Always use this method within this class. This will prevent exceptions
         try {
             return stack.pop();
         } catch (NoSuchElementException e) {
@@ -82,7 +83,7 @@ public class Calculator {
     }
 
     public void roll() {
-        stack.addLast(stack.pop());
+        stack.addLast(pop());
     }
 
     public void add() {
@@ -109,6 +110,21 @@ public class Calculator {
         Apfloat num2 = pop();
         Apfloat num1 = pop();
         stack.push(ApfloatMath.fmod(num1, num2));
+    }
+
+    public void square() {
+        Apfloat toSquare = pop();
+        stack.push(toSquare.multiply(toSquare));
+    }
+
+    public void sqrt() {
+        stack.push(ApfloatMath.sqrt(pop()));
+    }
+
+    public void pow() {
+        Apfloat num2 = pop();
+        Apfloat num1 = pop();
+        stack.push(ApfloatMath.pow(num1, num2));
     }
 
     public void setPrecision() {
