@@ -191,6 +191,19 @@ public class Calculator {
         }
     }
 
+    /**
+     * The factorial function. Can be applied only to integers; otherwise it does nothing.
+     */
+    public void fact() {
+        if (ApfloatMath.fmod(peek(), new Apfloat("1")).equals(new Apfloat("0"))) {
+            Apfloat product = pop();
+            for (Apfloat num = product.subtract(new Apfloat("1", precision)); num.compareTo(new Apfloat("0")) > 0; num = num.subtract(new Apfloat("1", precision))) {
+                product = product.multiply(num);
+            }
+            stack.push(product);
+        }
+    }
+
     public String toString() {
         return Arrays.toString(stack.toArray());
     }
